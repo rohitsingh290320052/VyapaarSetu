@@ -1,0 +1,27 @@
+# Node
+node_modules
+.next
+out
+.DS_Store
+.env.local
+.env
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+venv
+.envrc
+
+# Docker
+*.log
+**/docker-compose.override.yml
+
+# IDE
+.vscode
+.idea
+
+package-lock.json
+yarn.lock
+package.json
