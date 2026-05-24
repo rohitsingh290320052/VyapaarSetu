@@ -14,7 +14,7 @@ class Product(Base):
     sku = Column(String, nullable=True, unique=True)
     category = Column(String, nullable=True, index=True)
     description = Column(String, nullable=True)
-    metadata = Column(JSON, nullable=True)
+    meta = Column('metadata', JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     brand = relationship('Brand', back_populates='products')

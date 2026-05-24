@@ -15,7 +15,7 @@ class Transaction(Base):
     currency = Column(String, nullable=False, default='INR')
     type = Column(String, nullable=False)
     status = Column(String, nullable=False, default='completed')
-    metadata = Column(JSON, nullable=True)
+    meta = Column('metadata', JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     payment = relationship('Payment')

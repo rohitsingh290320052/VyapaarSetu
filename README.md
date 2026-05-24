@@ -115,6 +115,10 @@ Once the MOQ is reached:
 - Vercel
 - Railway / Render
 
+> For local deployment, the backend will load `backend/.env` if present and otherwise fall back to `backend/.env.example`.
+> For a production container stack, use:
+> `docker compose -f docker-compose.prod.yml up --build`
+
 ## Integrations
 - Razorpay
 - Firebase Cloud Messaging

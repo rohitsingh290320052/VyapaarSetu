@@ -10,7 +10,9 @@ from app.db.session import engine
 from app.db.base import Base
 
 setup_logging()
-Base.metadata.create_all(bind=engine.sync_engine)
+# Database schema is managed via Alembic migrations. Do not call
+# `Base.metadata.create_all(...)` on application startup in production.
+# Use `alembic upgrade head` to apply migrations.
 
 app = FastAPI(
     title='RetailLink Platform API',

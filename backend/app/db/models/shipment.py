@@ -15,7 +15,7 @@ class Shipment(Base):
     status = Column(String, nullable=False, default='pending')
     route_cluster = Column(JSON, nullable=True)
     eta = Column(DateTime, nullable=True)
-    metadata = Column(JSON, nullable=True)
+    meta = Column('metadata', JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
