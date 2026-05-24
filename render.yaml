@@ -1,0 +1,57 @@
+# Render manifest for RetailLink
+# Connect this repo in Render and deploy the services defined below.
+
+services:
+  - type: web
+    name: retailink-backend
+    env: docker
+    branch: main
+    dockerfilePath: backend/Dockerfile
+    buildCommand: ""
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4"
+    envVars:
+      - key: ENV
+        value: production
+      - key: JWT_SECRET_KEY
+        # Set the value in the Render dashboard for security (do NOT commit secret here)
+        value: "REPLACE_ME"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: retailink-db
+          property: connectionString
+      - key: BACKEND_CORS_ORIGINS
+        value: https://<your-frontend-url>
+
+  - type: web
+    name: retailink-frontend
+    env: docker
+    branch: main
+    dockerfilePath: frontend/Dockerfile
+    buildCommand: ""
+    startCommand: "npm run start"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: API_URL
+        value: https://<your-backend-url>
+
+databases:
+  - name: retailink-db
+    engine: postgres
+    version: "15"
+    plan: starter
+ 
+jobs:
+  - type: job
+    name: retailink-migrations
+    env: docker
+    dockerfilePath: backend/Dockerfile
+    startCommand: alembic upgrade head
+    runOnDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: retailink-db
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        value: "REPLACE_ME"

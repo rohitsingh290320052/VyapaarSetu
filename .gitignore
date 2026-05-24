@@ -25,3 +25,4 @@ venv
 package-lock.json
 yarn.lock
 package.json
+jwt_secret.txt
